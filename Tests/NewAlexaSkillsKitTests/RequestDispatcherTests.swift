@@ -1,5 +1,5 @@
 import Foundation
-import AlexaSkillsKit
+import NewAlexaSkillsKit
 import XCTest
 
 private class FakeRequestHandler: RequestHandler {
@@ -9,17 +9,17 @@ private class FakeRequestHandler: RequestHandler {
     
     func handleLaunch(request: LaunchRequest, session: Session, next: @escaping (StandardResult) -> ()) {
         handleLaunchCalled = true
-        next(.success(standardResponse: StandardResponse(), sessionAttributes: [String: Any]()))
+        next(.success((standardResponse: StandardResponse(), sessionAttributes: [String: Any]())))
     }
     
     func handleIntent(request: IntentRequest, session: Session, next: @escaping (StandardResult) -> ()) {
         handleIntentCalled = true
-        next(.success(standardResponse: StandardResponse(), sessionAttributes: [String: Any]()))
+        next(.success((standardResponse: StandardResponse(), sessionAttributes: [String: Any]())))
     }
     
     func handleSessionEnded(request: SessionEndedRequest, session: Session, next: @escaping (VoidResult) -> ()) {
         handleSessionEndedCalled = true
-        next(.success())
+//        next(.success())
     }
 }
 

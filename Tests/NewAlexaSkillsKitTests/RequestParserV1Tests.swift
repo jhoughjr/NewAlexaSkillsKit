@@ -1,5 +1,5 @@
 import Foundation
-import AlexaSkillsKit
+import NewAlexaSkillsKit
 import XCTest
 
 private func createFilePath(for fileName: String) -> URL {

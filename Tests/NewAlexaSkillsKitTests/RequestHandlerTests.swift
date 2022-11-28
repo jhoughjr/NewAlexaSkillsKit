@@ -1,18 +1,21 @@
 import Foundation
-import AlexaSkillsKit
+import NewAlexaSkillsKit
 import XCTest
 
 private class FakeRequestHandler: RequestHandler {
     func handleLaunch(request: LaunchRequest, session: Session, next: @escaping (StandardResult) -> ()) {
-        next(.success(standardResponse: StandardResponse(), sessionAttributes: [:]))
+        next(.success((standardResponse: StandardResponse(), sessionAttributes: [:])))
     }
     
     func handleIntent(request: IntentRequest, session: Session, next: @escaping (StandardResult) -> ()) {
-        next(.success(standardResponse: StandardResponse(), sessionAttributes: [:]))
+        next(.success((standardResponse: StandardResponse(), sessionAttributes: [:])))
     }
     
-    func handleSessionEnded(request: SessionEndedRequest, session: Session, next: @escaping (VoidResult) -> ()) {
-        next(.success())
+    func handleSessionEnded(request: SessionEndedRequest,
+                            session: Session,
+                            next: @escaping (VoidResult) -> ()) {
+            
+//        next(.success())
     }
 }
 
