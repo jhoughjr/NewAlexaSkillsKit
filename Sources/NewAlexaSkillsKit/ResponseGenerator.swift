@@ -1,6 +1,6 @@
 import Foundation
 
-public protocol ResponseGenerator: class {
+public protocol ResponseGenerator: AnyObject {
     var standardResponse: StandardResponse? {get set}
     var sessionAttributes: [String: Any] {get set}
     
@@ -11,12 +11,12 @@ public protocol ResponseGenerator: class {
 }
 
 public extension ResponseGenerator {
-    public func update(standardResponse: StandardResponse?, sessionAttributes: [String: Any]) {
+    func update(standardResponse: StandardResponse?, sessionAttributes: [String: Any]) {
         self.standardResponse = standardResponse
         self.sessionAttributes = sessionAttributes
     }
     
-    public func generateJSON(options: JSONSerialization.WritingOptions = []) throws -> Data {
+    func generateJSON(options: JSONSerialization.WritingOptions = []) throws -> Data {
         let data = try JSONSerialization.data(withJSONObject: generateJSONObject(), options: options)
         return data
     }

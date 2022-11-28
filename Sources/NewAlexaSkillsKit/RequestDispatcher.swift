@@ -31,6 +31,8 @@ open class RequestDispatcher {
         switch dispatchResult {
         case .success(let data):
             return data
+        case .voidSuccess:
+            return Data()
         case .failure(let error):
             throw error
         }
@@ -42,7 +44,8 @@ open class RequestDispatcher {
     /// - Parameters:
     ///   - data: Input data.
     ///   - completion: Completion handler.
-    open func dispatch(data: Data, completion: @escaping (Result<Data>) -> ()) {
+    open func dispatch(data: Data,
+                       completion: @escaping (Result<Data>) -> ()) {
         guard let _ = try? requestParser.update(with: data),
             let requestType = requestParser.parseRequestType() else {
                 completion(.failure(MessageError(message: "Error parsing request")))

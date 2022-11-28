@@ -53,6 +53,8 @@ class RequestHandlerTests: XCTestCase {
             case .success(let result):
                 XCTAssertEqual(result.standardResponse, StandardResponse())
                 XCTAssertTrue(result.sessionAttributes.isEmpty)
+            case .voidSuccess:
+                XCTFail()
             case .failure:
                 XCTFail()
             }

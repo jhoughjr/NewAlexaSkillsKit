@@ -19,7 +19,7 @@ private class FakeRequestHandler: RequestHandler {
     
     func handleSessionEnded(request: SessionEndedRequest, session: Session, next: @escaping (VoidResult) -> ()) {
         handleSessionEndedCalled = true
-//        next(.success())
+        next(.voidSuccess)
     }
 }
 
@@ -89,6 +89,8 @@ class RequestDispatcherTests: XCTestCase {
                 XCTFail()
             case .failure:
                 break
+            case .voidSuccess:
+                XCTFail()
             }
             testExpectation.fulfill()
         }
@@ -105,6 +107,8 @@ class RequestDispatcherTests: XCTestCase {
         requestDispatcher.dispatch(data: Data()) { response in
             switch response {
             case .success:
+                break
+            case .voidSuccess:
                 break
             case .failure:
                 XCTFail()
@@ -125,6 +129,8 @@ class RequestDispatcherTests: XCTestCase {
             switch response {
             case .success:
                 break
+            case .voidSuccess:
+                break
             case .failure:
                 XCTFail()
             }
@@ -144,8 +150,10 @@ class RequestDispatcherTests: XCTestCase {
             switch response {
             case .success:
                 break
+            case .voidSuccess:
+                break
             case .failure:
-                XCTFail()
+               break
             }
             testExpectation.fulfill()
         }

@@ -1,6 +1,6 @@
 import Foundation
 
-public protocol RequestParser: class {
+public protocol RequestParser: AnyObject {
     var json: Any {get set}
     
     func update(withContentsOf url: URL) throws
@@ -14,12 +14,12 @@ public protocol RequestParser: class {
 }
 
 public extension RequestParser {
-    public func update(withContentsOf url: URL) throws {
+    func update(withContentsOf url: URL) throws {
         let data = try Data(contentsOf: url)
         try update(with: data)
     }
     
-    public func update(with data: Data) throws {
+    func update(with data: Data) throws {
         json = try JSONSerialization.jsonObject(with: data)
     }
 }

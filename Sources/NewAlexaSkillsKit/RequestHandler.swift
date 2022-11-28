@@ -14,17 +14,27 @@ public struct MessageError: Swift.Error, Equatable {
 
 public enum Result<T> {
     case success(T)
+    case voidSuccess
     case failure(MessageError)
     
     // Can't implement Equatable unless session attributes are changed from 
     // [String: Any] to something that can be compared
 }
 
-public typealias StandardResult = Result<(standardResponse: StandardResponse, sessionAttributes: [String: Any])>
-public typealias VoidResult = Result<Void>
+public
+typealias StandardResult = Result<(standardResponse: StandardResponse,
+                                          sessionAttributes: [String: Any])>
+public
+typealias VoidResult = Result<Void>
 
 public protocol RequestHandler {
-    func handleLaunch(request: LaunchRequest, session: Session, next: @escaping (StandardResult) -> ())
-    func handleIntent(request: IntentRequest, session: Session, next: @escaping (StandardResult) -> ())
-    func handleSessionEnded(request: SessionEndedRequest, session: Session, next: @escaping (VoidResult) -> ())
+    func handleLaunch(request: LaunchRequest,
+                      session: Session,
+                      next: @escaping (StandardResult) -> ())
+    func handleIntent(request: IntentRequest,
+                      session: Session,
+                      next: @escaping (StandardResult) -> ())
+    func handleSessionEnded(request: SessionEndedRequest,
+                            session: Session,
+                            next: @escaping (VoidResult) -> ())
 }
